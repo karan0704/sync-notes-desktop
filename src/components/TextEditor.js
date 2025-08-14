@@ -93,7 +93,9 @@ function TextEditor({
                     className="filename-input"
                 />
                 <div className="header-buttons">
-                    {isModified && <span className="modified-indicator">●</span>}
+                    <span className={`save-status ${isModified ? 'modified' : ''}`}>
+                        {isModified ? 'Unsaved changes' : 'All changes saved'}
+                    </span>
                     <button onClick={handleSave} className="save-button">
                         Save (Ctrl+S)
                     </button>
