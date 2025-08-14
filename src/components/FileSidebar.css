@@ -1,0 +1,128 @@
+.file-sidebar {
+    width: 300px;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sidebar-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e9ecef;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    color: #495057;
+    font-size: 18px;
+}
+
+.new-file-btn {
+    padding: 8px 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.new-file-btn:hover {
+    background-color: #218838;
+}
+
+.file-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 0;
+}
+
+.no-files {
+    padding: 40px 20px;
+    text-align: center;
+    color: #6c757d;
+}
+
+.no-files p {
+    margin: 5px 0;
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.2s;
+}
+
+.file-item:hover {
+    background-color: #e9ecef;
+}
+
+.file-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.file-item.active .file-preview,
+.file-item.active .file-date {
+    color: #cce7ff;
+}
+
+.file-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.file-name {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-preview {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-date {
+    font-size: 11px;
+    color: #adb5bd;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.file-item:hover .delete-btn {
+    opacity: 1;
+}
+
+.delete-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}

@@ -84,3 +84,25 @@
     color: #adb5bd;
     font-style: italic;
 }
+
+.no-file-selected {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    color: #6c757d;
+    background-color: #f8f9fa;
+}
+
+.no-file-selected h2 {
+    margin-bottom: 10px;
+    color: #495057;
+}
+
+.no-file-selected p {
+    font-size: 16px;
+    max-width: 400px;
+}
+

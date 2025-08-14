@@ -1,27 +1,87 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from 'react';
 import './TextEditor.css';
 
-function TextEditor() {
+function TextEditor({
+                        currentFile,
+                        onSave,
+                        onContentChange,
+                        onFileNameChange
+                    }) {
     const [content, setContent] = useState('');
     const [fileName, setFileName] = useState('Untitled');
     const [isModified, setIsModified] = useState(false);
 
-    const handleSave = () => {
-        setIsModified(false);
-        console.log('Saved:', fileName, content);
-    }
+    // Update editor when file changes
+    useEffect(() => {
+        if (currentFile) {
+            setContent(currentFile.content);
+            setFileName(currentFile.name);
+            setIsModified(false);
+        }
+    }, [currentFile]);
 
+    // Handle text changes
     const handleContentChange = (event) => {
-        setContent(event.target.value);
+        const newContent = event.target.value;
+        setContent(newContent);
         setIsModified(true);
+        onContentChange(newContent);
     };
 
+    // Handle filename changes
+    const handleFileNameChange = (event) => {
+        const newName = event.target.value;
+        setFileName(newName);
+        setIsModified(true);
+        onFileNameChange(newName);
+    };
+
+    // Save function
+    const handleSave = () => {
+        if (currentFile && onSave) {
+            onSave({
+                ...currentFile,
+                name: fileName,
+                content: content,
+                lastModified: new Date().toISOString()
+            });
+            setIsModified(false);
+        }
+    };
+
+    // Auto-save every 10 seconds when modified
     useEffect(() => {
-        const autoSave = setTimeout(() => {
-            handleSave();
-        }, 30000);
-        return () => clearTimeout(autoSave);
-    }, [isModified, content]);
+        if (isModified && currentFile) {
+            const autoSave = setTimeout(() => {
+                handleSave();
+            }, 10000); // 10 seconds for better UX
+
+            return () => clearTimeout(autoSave);
+        }
+    }, [isModified, content, fileName]);
+
+    // Keyboard shortcuts
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.ctrlKey && event.key === 's') {
+                event.preventDefault();
+                handleSave();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [handleSave]);
+
+    if (!currentFile) {
+        return (
+            <div className="no-file-selected">
+                <h2>Welcome to Sync Notes</h2>
+                <p>Select a note from the sidebar or create a new one to get started.</p>
+            </div>
+        );
+    }
+
     return (
         <div className="text-editor">
             {/* Header with filename and save button */}
@@ -29,13 +89,13 @@ function TextEditor() {
                 <input
                     type="text"
                     value={fileName}
-                    onChange={(e) => setFileName(e.target.value)}
+                    onChange={handleFileNameChange}
                     className="filename-input"
                 />
                 <div className="header-buttons">
                     {isModified && <span className="modified-indicator">●</span>}
-                    <button className="save-button" onClick={handleSave}>
-                        Save
+                    <button onClick={handleSave} className="save-button">
+                        Save (Ctrl+S)
                     </button>
                 </div>
             </div>
@@ -44,14 +104,16 @@ function TextEditor() {
             <textarea
                 value={content}
                 onChange={handleContentChange}
-                placeholder="Start typing your note..."
+                placeholder="Start typing your notes here..."
                 className="text-area"
+                autoFocus
             />
 
-            {/* Status Bar*/}
+            {/* Status bar */}
             <div className="status-bar">
                 <span>Characters: {content.length}</span>
-                <span>Words:{content.split(' ').filter(word => word).length}</span>
+                <span>Words: {content.split(' ').filter(word => word.trim()).length}</span>
+                <span>Auto-save: Every 10 seconds</span>
             </div>
         </div>
     );
