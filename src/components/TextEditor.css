@@ -1,0 +1,86 @@
+.text-editor {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.filename-input {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.filename-input:focus {
+    outline: 2px solid #007bff;
+    background-color: white;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modified-indicator {
+    color: #dc3545;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.save-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.save-button:hover {
+    background-color: #0056b3;
+}
+
+.text-area {
+    flex: 1;
+    padding: 20px;
+    border: none;
+    resize: none;
+    font-size: 16px;
+    line-height: 1.6;
+    outline: none;
+    font-family: 'Courier New', monospace;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    font-size: 12px;
+    color: #6c757d;
+}
+
+/* Make it look professional */
+.text-area:focus {
+    background-color: #fefefe;
+}
+
+.text-area::placeholder {
+    color: #adb5bd;
+    font-style: italic;
+}
