@@ -1,5 +1,6 @@
 {
   "name": "sync-notes-desktop",
+  "main": "public/electron.js",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron": "electron .",
-    "electron-dev": "ELECTRON_IS_DEV=true electron .",
+    "electron-dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && npm run electron-dev\"",
     "build-electron": "npm run build && electron-builder"
   },
   "eslintConfig": {
@@ -42,7 +43,10 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^9.2.0",
+    "cross-env": "^10.0.0",
     "electron": "^37.2.6",
-    "electron-builder": "^26.0.12"
+    "electron-builder": "^26.0.12",
+    "wait-on": "^8.0.4"
   }
 }
