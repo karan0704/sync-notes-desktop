@@ -1,0 +1,75 @@
+.sync-status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    font-size: 12px;
+}
+
+.sync-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sync-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.sync-dot.syncing {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.sync-text {
+    color: #495057;
+    font-weight: 500;
+}
+
+.last-sync {
+    color: #6c757d;
+    font-size: 11px;
+}
+
+.manual-sync-btn {
+    padding: 4px 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.manual-sync-btn:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.manual-sync-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+.connect-btn {
+    padding: 4px 12px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.connect-btn:hover {
+    background-color: #138496;
+}
