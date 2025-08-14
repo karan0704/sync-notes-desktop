@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron');
+const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
 
@@ -12,13 +12,16 @@ function createWindow() {
         }
     });
 
-    // Load the React app
-    const isDev = process.env.ELECTRON_IS_DEV === 'true';
+    // Load React app
+    mainWindow.loadURL(
+        isDev
+            ? 'http://localhost:3000'
+            : `file://${path.join(__dirname, '../build/index.html')}`
+    );
+
+    // Open DevTools in development
     if (isDev) {
-        mainWindow.loadURL('http://localhost:3000');
         mainWindow.webContents.openDevTools();
-    } else {
-        mainWindow.loadFile(path.join(__dirname, '../build/index.html'));
     }
 }
 
